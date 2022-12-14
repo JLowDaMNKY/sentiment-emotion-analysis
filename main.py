@@ -16,7 +16,7 @@ import logging
 
 class Main:
 
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__()
 
         self.init_ui()
