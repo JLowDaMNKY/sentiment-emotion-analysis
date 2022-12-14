@@ -32,7 +32,7 @@ class Main:
 
 
     def create_log(self):
-        log_dir = "Final Project/logs/log.txt"
+        log_dir = "logs/log.txt"
         with open(log_dir, 'w') as f:
             f.write(str(time.localtime))
 
