@@ -1,5 +1,5 @@
 # sentiment-emotion-analysis
-py -3 -m venv .venv
-set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-.venv\scripts\activate 
-pip install -r requirements.txt
+py -3 -m venv .venv <br />
+set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process <br />
+.venv\scripts\activate <br />
+pip install -r requirements.txt <br />
