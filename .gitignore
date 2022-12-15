@@ -1,3 +1,4 @@
 sentiment-emotion-analysis.code-workspace
 __pycache__
 .venv
+logs
