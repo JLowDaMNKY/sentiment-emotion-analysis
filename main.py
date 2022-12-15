@@ -44,14 +44,34 @@ class Main:
 
     def init_ui(self):
         sg.theme('DarkAmber')
+
+        video_row = [
+            [sg.Image(filename="", key="-IMAGE-", expand_x=True)],
+        ]
+
+        title_row = [
+            [sg.Text("OpenCV Demo", size=(800, 1), justification="center")],
+        ]
+
+        text_row = [
+            [sg.Text('Emotion: ', size=(800, 1), justification="center", key="-EMOTION-")],
+            [sg.Text('', size=(800, 1), justification="center", key="-SENTIMENT-")],
+            sg.HorizontalSeparator(),
+        ]
+
+        button_row = [
+            [sg.Button("Start Session", size=(20, 1)), sg.Push(), sg.Button("Exit", size=(20, 1))],
+        ]
+
+
         layout = [
-            [sg.Text("OpenCV Demo", size=(60, 1), justification="center")],
-            [sg.Image(filename="", key="-IMAGE-")],
-            [sg.Text('Emotion: ', size=(60, 1), justification="center", key="-EMOTION-")],
-            [sg.Button("Start Session", size=(10, 1))],
-            [sg.Button("Exit", size=(10, 1))],    
-            ]
-        self.window = sg.Window("OpenCV Integration", layout, location=(800, 400))
+            title_row,
+            video_row,
+            text_row,
+            button_row
+        ]
+        
+        self.window = sg.Window("OpenCV Integration", layout, location=(400, 200), text_justification='c', size=(800, 650))
 
 
     def ui_helper(self):
@@ -84,10 +104,10 @@ class Main:
         while True:
             audio = caller.recognize_from_microphone() # use azure speech-to-text to get audio from microphone
             sentiment = SentimentIntensityAnalyzer() 
-            audio_sentiment = sentiment.polarity_scores(audio) # use vadersentiment to get sentiment of audio 
+            audio_sentiment = sentiment.polarity_scores(audio) # type: ignore use vadersentiment to get sentiment of audio 
             print(audio) # Return sentiment score of audio
             self.logger.info("{}: {} {}".format(time.asctime(time.localtime()), audio, audio_sentiment))
-                
+            self.window["-SENTIMENT-"].update("{}: {}".format(str(audio_sentiment['compound']), audio)) #type: ignore                
 
 if __name__ == '__main__':
     main = Main()
